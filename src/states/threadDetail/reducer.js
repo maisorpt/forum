@@ -8,50 +8,62 @@ function threadDetailReducer(threadDetail = [], action = {}) {
     case ActionType.CLEAR_THREAD_DETAIL:
       return null;
     case ActionType.TOGGLE_UPVOTE_THREAD_DETAIL:
-      var isUpvoted = threadDetail.upVotesBy && threadDetail.upVotesBy.includes(action.payload.userId);
-      var isDownvoted = threadDetail.downVotesBy && threadDetail.downVotesBy.includes(action.payload.userId);
-      if (isDownvoted) {
+      if(action.payload.userId) {
+        const isUpvoted = threadDetail.upVotesBy && threadDetail.upVotesBy.includes(action.payload.userId);
+        const isDownvoted = threadDetail.downVotesBy && threadDetail.downVotesBy.includes(action.payload.userId);
+        if (isDownvoted) {
+          return {
+            ...threadDetail,
+            upVotesBy: isUpvoted
+            ? threadDetail.upVotesBy.filter((id) => id !== action.payload.userId)
+            : threadDetail.upVotesBy.concat(action.payload.userId),
+            downVotesBy: threadDetail.downVotesBy.filter((id) => id !== action.payload.userId),
+          };
+        }
         return {
           ...threadDetail,
           upVotesBy: isUpvoted
           ? threadDetail.upVotesBy.filter((id) => id !== action.payload.userId)
           : threadDetail.upVotesBy.concat(action.payload.userId),
-          downVotesBy: threadDetail.downVotesBy.filter((id) => id !== action.payload.userId),
         };
       }
-      return {
-        ...threadDetail,
-        upVotesBy: isUpvoted
-        ? threadDetail.upVotesBy.filter((id) => id !== action.payload.userId)
-        : threadDetail.upVotesBy.concat(action.payload.userId),
-      };
+      break;
     case ActionType.TOGGLE_DOWNVOTE_THREAD_DETAIL:
-      if (isUpvoted) {
+      if(action.payload.userId) {
+        const isUpvoted = threadDetail.upVotesBy && threadDetail.upVotesBy.includes(action.payload.userId);
+        const isDownvoted = threadDetail.downVotesBy && threadDetail.downVotesBy.includes(action.payload.userId);
+        if (isUpvoted) {
+          return {
+            ...threadDetail,
+            downVotesBy: isDownvoted
+            ? threadDetail.downVotesBy.filter((id) => id !== action.payload.userId)
+            : threadDetail.downVotesBy.concat(action.payload.userId),
+            upVotesBy: threadDetail.upVotesBy.filter((id) => id !== action.payload.userId),
+          };
+        }
         return {
           ...threadDetail,
           downVotesBy: isDownvoted
           ? threadDetail.downVotesBy.filter((id) => id !== action.payload.userId)
           : threadDetail.downVotesBy.concat(action.payload.userId),
-          upVotesBy: threadDetail.upVotesBy.filter((id) => id !== action.payload.userId),
         };
       }
-      return {
-        ...threadDetail,
-        downVotesBy: isDownvoted
-        ? threadDetail.downVotesBy.filter((id) => id !== action.payload.userId)
-        : threadDetail.downVotesBy.concat(action.payload.userId),
-      };
+      break;
     case ActionType.TOGGLE_NEUTRALVOTE_THREAD_DETAIL:
-      if (isUpvoted) {
-        return {
-          ...threadDetail,
-          upVotesBy: threadDetail.upVotesBy.filter((id) => id !== action.payload.userId),
-        };
-      } else if (isDownvoted) {
-        return {
-          ...threadDetail,
-          downVotesBy: threadDetail.downVotesBy.filter((id) => id !== action.payload.userId),
-        };
+      if(action.payload.userId) {
+        const isUpvoted = threadDetail.upVotesBy && threadDetail.upVotesBy.includes(action.payload.userId);
+        const isDownvoted = threadDetail.downVotesBy && threadDetail.downVotesBy.includes(action.payload.userId);
+        if (isUpvoted) {
+          return {
+            ...threadDetail,
+            upVotesBy: threadDetail.upVotesBy.filter((id) => id !== action.payload.userId),
+          };
+        } else if (isDownvoted) {
+          return {
+            ...threadDetail,
+            downVotesBy: threadDetail.downVotesBy.filter((id) => id !== action.payload.userId),
+          };
+        }
       }
       break;
     case ActionType.TOGGLE_UPVOTE_THREAD_COMMENT:

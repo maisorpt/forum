@@ -3,9 +3,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import ThreadList from '../components/ThreadList';
 import { asyncPopulateUsersAndThreads } from '../states/shared/action';
 import { asyncToggleDownvoteThread, asyncToggleNeutralvoteThread, asyncToggleUpvoteThread } from '../states/threads/action';
+import { FaChartBar, FaPlusCircle } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
 function HomePage() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { threads } = useSelector((state) => state);
 
   useEffect(() => {
@@ -24,9 +27,19 @@ function HomePage() {
     dispatch(asyncToggleDownvoteThread(threadId));
   }
 
+  const goToCreate = () => {
+    navigate('/create' )
+  }
+
+  const goToLeaderBoards = () => {
+    navigate('/leaderboards' )
+  }
+
   return (
     <div>
       <ThreadList threads={ threads }  upvote={ onUpvoteThread } downvote={ onDownvoteThread } neutralvote={ onNeutralvoteThread }/>
+      <button className='new-thread-button__create' onClick={ goToCreate }><FaPlusCircle/></button>
+      <button className='new-thread-button__leaderboards' onClick={ goToLeaderBoards }><FaChartBar/></button>
     </div>
   );
 }

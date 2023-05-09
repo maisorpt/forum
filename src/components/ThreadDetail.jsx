@@ -65,7 +65,7 @@ function ThreadDetail({
           />
         </footer>
       </div>
-      <ThreadComment comments={comments} upvoteComment={ upvoteComment } downvoteComment={ downvoteComment } neutralvoteComment={ neutralvoteComment } addComment={ addComment }/>
+      <ThreadComment comments={comments} upvoteComment={upvoteComment} downvoteComment={downvoteComment} neutralvoteComment={neutralvoteComment} addComment={addComment} />
     </>
   );
 }

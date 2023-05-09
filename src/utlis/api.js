@@ -272,7 +272,7 @@ async function createComment({ content }, threadId) {
   async function getLeaderboards() {
     const response = await fetch(`${BASE_URL}/leaderboards`);
 
-    const responseJson = response.json();
+    const responseJson = await response.json();
     const { status, message } = responseJson;
 
     if (status !== 'success') {

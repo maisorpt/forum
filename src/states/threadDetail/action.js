@@ -193,6 +193,7 @@ function asyncToggleNeutralvoteThreadComment(commentId) {
 
 function asyncAddComment({ comment }) {
   return async (dispatch, getState) => {
+    dispatch(showLoading());
     const { detailThread } = getState();
     const commentObj = { content: comment };
     try {
@@ -201,6 +202,7 @@ function asyncAddComment({ comment }) {
     } catch (error) {
       alert(error.message);
     }
+    dispatch(hideLoading());
   };
 }
 

@@ -19,9 +19,7 @@ function Navigation({ authUser, signOut }) {
 
   return (
     <div className='navigation'>
-      <Link to={'/'}>
         <p>Connect - Social Platform</p>
-      </Link>
       <div className='navigation_profile'>
         <img src={avatar} alt={name} />
         <p>Hello, {name}</p>

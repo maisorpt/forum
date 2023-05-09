@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import ThreadDetail from '../components/ThreadDetail';
 import { useDispatch, useSelector } from 'react-redux';
 import { asyncAddComment, asyncReceiveThreadDetail, asyncToggleDownvoteThreadComment, asyncToggleDownvoteThreadDetail, asyncToggleNeutralvoteThreadComment, asyncToggleNeutralvoteThreadDetail, asyncToggleUpvoteThreadComment, asyncToggleUpvoteThreadDetail } from '../states/threadDetail/action';
+import { FaHome } from 'react-icons/fa';
 
 function DetailPage() {
+  const navigate = useNavigate();
   const { id } = useParams();
   const {
     detailThread = null,
@@ -47,9 +49,14 @@ function DetailPage() {
     return null;
   }
 
+  const goToHome = () => {
+    navigate('/' )
+  }
+
   return (
     <section className='detail-page'>
       <ThreadDetail { ...detailThread } upvote={ onUpvoteThread } downvote={ onDownvoteThread }  neutralvote={ onNeutralvoteThread} upvoteComment={ onUpvoteComment } downvoteComment={ onDownvoteComment } neutralvoteComment={ onNeutralvoteComment } addComment={ onAddComment }/>
+      <button className='new-thread-button__home' onClick={ goToHome }><FaHome/></button>
     </section>
   );
 }

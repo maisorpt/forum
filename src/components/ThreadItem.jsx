@@ -26,27 +26,23 @@ function ThreadItem({id, title, body, category, createdAt, ownerId, upVotesBy, d
   )
 }
 
-const userShape = {
-  name: PropTypes.string.isRequired,
-};
-
 const threadItemShape = {
   id: PropTypes.string.isRequired,
-  tittle: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
   body: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
   createdAt: PropTypes.string.isRequired,
   ownerId: PropTypes.string.isRequired,
   upVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,
   downVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,
-  totalComment: PropTypes.number.isRequired,
-  user: PropTypes.shape(userShape).isRequired,
+  totalComment: PropTypes.number,
 };
 
 ThreadItem.propTypes = {
   ...threadItemShape,
-  upVote: PropTypes.func.isRequired,
-  downVote: PropTypes.func.isRequired,
+  upvote: PropTypes.func.isRequired,
+  downvote: PropTypes.func.isRequired,
+  neutralvote: PropTypes.func.isRequired,
 };
 
 export { threadItemShape };
