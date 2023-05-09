@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import PropTypes, { object } from 'prop-types';
 import CommentInput from './CommentInput';
 import CommentList from './CommentList';
 
@@ -17,7 +17,7 @@ ThreadComment.propTypes = {
   downvoteComment: PropTypes.func.isRequired,
   neutralvoteComment: PropTypes.func.isRequired,
   addComment: PropTypes.func.isRequired,
-  comments: PropTypes.arrayOf(PropTypes.string).isRequired,
+  comments: PropTypes.arrayOf(object).isRequired,
 };
 
 export default ThreadComment;

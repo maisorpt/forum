@@ -78,12 +78,12 @@ function ThreadInformation({ id, createdAt, ownerId, upVotesBy=[], downVotesBy=[
 }
 
 const threadItemShape = {
-  id: PropTypes.string.isRequired,
-  createdAt: PropTypes.string.isRequired,
-  ownerId: PropTypes.string.isRequired,
-  upVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,
-  downVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,
-  totalComments: PropTypes.number.isRequired,
+  id: PropTypes.string,
+  createdAt: PropTypes.string,
+  ownerId: PropTypes.string,
+  upVotesBy: PropTypes.arrayOf(PropTypes.string),
+  downVotesBy: PropTypes.arrayOf(PropTypes.string),
+  totalComments: PropTypes.number,
 };
 
 ThreadInformation.propTypes = {

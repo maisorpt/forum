@@ -11,7 +11,7 @@ function ThreadInput( { addThread } ) {
     <form className='thread-input'>
       <input className='thread-input__tittle' type='text' placeholder='title' onChange={ onTitleChange }  value={ title }/>
       <input className='thread-input__category' type='text' placeholder='category' onChange={ onCategoryChange }  value={ category }/>
-      <textarea className='thread-__body' type='body' placeholder='body' onChange={ onBodyChange } >{ body }</textarea>
+      <textarea className='thread-__body' placeholder='body' onChange={ onBodyChange } value={body}></textarea>
       <button type='button' onClick={() => addThread({ title, body, category })}>Buat</button>
     </form>
   );

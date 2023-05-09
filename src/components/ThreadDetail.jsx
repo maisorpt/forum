@@ -5,9 +5,9 @@ import ThreadInformation from "./ThreadInformation";
 import ThreadComment from "./ThreadComment";
 
 function ThreadDetail({
-  id,
-  title,
-  body = "",
+  id ='',
+  title = '',
+  body = '',
   category,
   createdAt,
   owner = [],
@@ -25,6 +25,7 @@ function ThreadDetail({
   const totalComments = comments.length;
 
   const newBody = body.replace(/"/g, "");
+
   return (
     <>
       <div className="thread">
@@ -86,15 +87,15 @@ const commentShape = {
 };
 
 ThreadDetail.propTypes = {
-  id: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  body: PropTypes.string.isRequired,
-  category: PropTypes.string.isRequired,
-  createdAt: PropTypes.string.isRequired,
-  owner: PropTypes.shape(ownerShape).isRequired,
-  upVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,
-  downVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,
-  comments: PropTypes.arrayOf(PropTypes.shape(commentShape)).isRequired,
+  id: PropTypes.string,
+  title: PropTypes.string,
+  body: PropTypes.string,
+  category: PropTypes.string,
+  createdAt: PropTypes.string,
+  owner: PropTypes.shape(ownerShape),
+  upVotesBy: PropTypes.arrayOf(PropTypes.string),
+  downVotesBy: PropTypes.arrayOf(PropTypes.string),
+  comments: PropTypes.arrayOf(PropTypes.shape(commentShape)),
   upvote: PropTypes.func.isRequired,
   downvote: PropTypes.func.isRequired,
   neutralvote: PropTypes.func.isRequired,
