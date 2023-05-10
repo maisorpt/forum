@@ -7,10 +7,22 @@ function LoginInput({ login }) {
   const [password, onPasswordChange] = useInput('');
 
   return (
-    <form className='login-input'>
-      <input type='text' placeholder='Email' onChange={ onEmailChange } value={ email }/>
-      <input type='password' placeholder='Password' onChange={ onPasswordChange } value={ password }/>
-      <button type='button' onClick={() => login({ email, password })}>Login</button>
+    <form className="login-input">
+      <input
+        type="text"
+        placeholder="Email"
+        onChange={onEmailChange}
+        value={email}
+      />
+      <input
+        type="password"
+        placeholder="Password"
+        onChange={onPasswordChange}
+        value={password}
+      />
+      <button type="button" onClick={() => login({ email, password })}>
+        Login
+      </button>
     </form>
   );
 }

@@ -66,7 +66,7 @@ function toggleUpvoteThreadCommentActionCreator(userId, commentId) {
 }
 
 function toggleDownvoteThreadCommentActionCreator(userId, commentId) {
-return {
+  return {
     type: ActionType.TOGGLE_DOWNVOTE_THREAD_COMMENT,
     payload: {
       userId,
@@ -89,7 +89,7 @@ function addCommentActionCreator({ comment }) {
   return {
     type: ActionType.ADD_COMMENT,
     payload: {
-      comment: comment,
+      comment,
     },
   };
 }
@@ -109,11 +109,11 @@ function asyncReceiveThreadDetail(threadId) {
 
 function asyncToggleUpvoteThreadDetail() {
   return async (dispatch, getState) => {
-    const { authUser,  detailThread } = getState();
+    const { authUser, detailThread } = getState();
     dispatch(toggleUpvoteThreadDetailActionCreator(authUser.id));
 
     try {
-      await api.upvoteThread( detailThread.id);
+      await api.upvoteThread(detailThread.id);
     } catch (error) {
       alert(error.message);
       dispatch(toggleUpvoteThreadDetailActionCreator(authUser.id));
@@ -123,11 +123,11 @@ function asyncToggleUpvoteThreadDetail() {
 
 function asyncToggleDownvoteThreadDetail() {
   return async (dispatch, getState) => {
-    const { authUser,  detailThread } = getState();
+    const { authUser, detailThread } = getState();
     dispatch(toggleDownvoteThreadDetailActionCreator(authUser.id));
-  
+
     try {
-      await api.downvoteThread( detailThread.id);
+      await api.downvoteThread(detailThread.id);
     } catch (error) {
       alert(error.message);
       dispatch(toggleDownvoteThreadDetailActionCreator(authUser.id));
@@ -137,11 +137,11 @@ function asyncToggleDownvoteThreadDetail() {
 
 function asyncToggleNeutralvoteThreadDetail() {
   return async (dispatch, getState) => {
-    const { authUser,  detailThread } = getState();
+    const { authUser, detailThread } = getState();
     dispatch(toggleNeutralvoteThreadDetailActionCreator(authUser.id));
-  
+
     try {
-      await api.neutralvoteThread( detailThread.id);
+      await api.neutralvoteThread(detailThread.id);
     } catch (error) {
       alert(error.message);
       dispatch(toggleNeutralvoteThreadDetailActionCreator(authUser.id));
@@ -151,11 +151,11 @@ function asyncToggleNeutralvoteThreadDetail() {
 
 function asyncToggleUpvoteThreadComment(commentId) {
   return async (dispatch, getState) => {
-    const { authUser,  detailThread } = getState();
+    const { authUser, detailThread } = getState();
     dispatch(toggleUpvoteThreadCommentActionCreator(authUser.id, commentId));
-  
+
     try {
-      await api.upvoteComment( detailThread.id, commentId);
+      await api.upvoteComment(detailThread.id, commentId);
     } catch (error) {
       alert(error.message);
       dispatch(toggleUpvoteThreadCommentActionCreator(authUser.id, commentId));
@@ -165,14 +165,16 @@ function asyncToggleUpvoteThreadComment(commentId) {
 
 function asyncToggleDownvoteThreadComment(commentId) {
   return async (dispatch, getState) => {
-    const { authUser,  detailThread } = getState();
+    const { authUser, detailThread } = getState();
     dispatch(toggleDownvoteThreadCommentActionCreator(authUser.id, commentId));
-  
+
     try {
-      await api.downvoteComment( detailThread.id, commentId);
+      await api.downvoteComment(detailThread.id, commentId);
     } catch (error) {
       alert(error.message);
-      dispatch(toggleDownvoteThreadCommentActionCreator(authUser.id, commentId));
+      dispatch(
+        toggleDownvoteThreadCommentActionCreator(authUser.id, commentId),
+      );
     }
   };
 }
@@ -180,13 +182,17 @@ function asyncToggleDownvoteThreadComment(commentId) {
 function asyncToggleNeutralvoteThreadComment(commentId) {
   return async (dispatch, getState) => {
     const { authUser, detailThread } = getState();
-    dispatch(toggleNeutralvoteThreadCommentActionCreator(authUser.id, commentId));
-  
+    dispatch(
+      toggleNeutralvoteThreadCommentActionCreator(authUser.id, commentId),
+    );
+
     try {
-      await api.neutralvoteComment( detailThread.id, commentId);
+      await api.neutralvoteComment(detailThread.id, commentId);
     } catch (error) {
       alert(error.message);
-      dispatch(toggleNeutralvoteThreadCommentActionCreator(authUser.id, commentId));
+      dispatch(
+        toggleNeutralvoteThreadCommentActionCreator(authUser.id, commentId),
+      );
     }
   };
 }

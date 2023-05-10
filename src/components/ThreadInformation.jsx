@@ -1,78 +1,105 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FaThumbsUp, FaThumbsDown } from 'react-icons/fa';
-import { postedAt } from '../utlis';
 import { useSelector } from 'react-redux';
+import { postedAt } from '../utlis';
 
-function ThreadInformation({ id, createdAt, ownerId, upVotesBy=[], downVotesBy=[], totalComments, upvote, downvote, neutralvote }) {
+function ThreadInformation({
+  id,
+  createdAt,
+  ownerId,
+  upVotesBy = [],
+  downVotesBy = [],
+  totalComments,
+  upvote,
+  downvote,
+  neutralvote,
+}) {
   const { users, authUser } = useSelector((state) => state);
 
   const isThreadUpvoted = authUser && upVotesBy.includes(authUser.id);
   const isThreadDownvoted = authUser && downVotesBy.includes(authUser.id);
 
   const onUpvoteClick = () => {
-    if(!authUser){
-      alert("harus login");
+    if (!authUser) {
+      alert('harus login');
       return;
     }
-    if(isThreadUpvoted) {
-      neutralvote(id)
+    if (isThreadUpvoted) {
+      neutralvote(id);
     } else {
-      upvote(id)
+      upvote(id);
     }
   };
 
   const onDownvoteClick = () => {
-    if(!authUser){
-      alert("harus login");
+    if (!authUser) {
+      alert('harus login');
       return;
     }
-    if(isThreadDownvoted) {
-      neutralvote(id)
+    if (isThreadDownvoted) {
+      neutralvote(id);
     } else {
-      downvote(id)
+      downvote(id);
     }
   };
 
-  const user = users.find((user) => user.id === ownerId) || {};  
+  // eslint-disable-next-line no-shadow
+  const user = users.find((user) => user.id === ownerId) || {};
 
   return (
-    <div className='thread-item__information'>
-    {
-      upVotesBy && (
-        <div className='thread-item__votes'>
+    <div className="thread-item__information">
+      {upVotesBy && (
+        <div className="thread-item__votes">
           <p>
-            <button type='button' aria-label='vote' onClick={ () => onUpvoteClick() }>
-              { isThreadUpvoted ? <FaThumbsUp style={{ color: 'red' }} /> : <FaThumbsUp />}
+            <button
+              type="button"
+              aria-label="vote"
+              onClick={() => onUpvoteClick()}
+            >
+              {isThreadUpvoted ? (
+                <FaThumbsUp style={{ color: 'red' }} />
+              ) : (
+                <FaThumbsUp />
+              )}
             </button>
             {' '}
             {upVotesBy.length}
           </p>
         </div>
-      )
-    }
-    {
-      downVotesBy && (
-        <div className='thread-item__votes'>
+      )}
+      {downVotesBy && (
+        <div className="thread-item__votes">
           <p>
-            <button type='button' aria-label='vote'  onClick={ () => onDownvoteClick() }>
-              {  isThreadDownvoted ? <FaThumbsDown style={{ color: 'red' }} /> : <FaThumbsDown />}
+            <button
+              type="button"
+              aria-label="vote"
+              onClick={() => onDownvoteClick()}
+            >
+              {isThreadDownvoted ? (
+                <FaThumbsDown style={{ color: 'red' }} />
+              ) : (
+                <FaThumbsDown />
+              )}
             </button>
             {' '}
             {downVotesBy.length}
           </p>
         </div>
-      )
-    }
-      <p className='thread-item__total-comment'>{ totalComments } REPLY</p>
-      {
-        user && user.name && (
-          <>
-          <p className='thread-item__creator'>Created by { user.name }</p>
-          <p className='thread-item__created-date'>{ postedAt(createdAt) }</p>
-          </>
-        )
-      }
+      )}
+      <p className="thread-item__total-comment">
+        {totalComments}
+        REPLY
+      </p>
+      {user && user.name && (
+        <>
+          <p className="thread-item__creator">
+            Created by
+            {user.name}
+          </p>
+          <p className="thread-item__created-date">{postedAt(createdAt)}</p>
+        </>
+      )}
     </div>
   );
 }
@@ -87,7 +114,7 @@ const threadItemShape = {
 };
 
 ThreadInformation.propTypes = {
-    ...threadItemShape,
+  ...threadItemShape,
 };
 
 export default ThreadInformation;

@@ -1,10 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { postedAt } from '../utlis/index';
 import { useSelector } from 'react-redux';
 import { FaThumbsDown, FaThumbsUp } from 'react-icons/fa';
+import { postedAt } from '../utlis/index';
 
-function CommentItem({ id, content, createdAt, owner, upVotesBy = [], downVotesBy = [], upvoteComment, downvoteComment, neutralvoteComment }) {
+function CommentItem({
+  id,
+  content,
+  createdAt,
+  owner,
+  upVotesBy = [],
+  downVotesBy = [],
+  upvoteComment,
+  downvoteComment,
+  neutralvoteComment,
+}) {
   const { authUser } = useSelector((state) => state);
 
   const isCommentUpvoted = authUser && upVotesBy.includes(authUser.id);
@@ -12,11 +22,11 @@ function CommentItem({ id, content, createdAt, owner, upVotesBy = [], downVotesB
 
   const onUpvoteClick = () => {
     if (!authUser) {
-      alert("harus login");
+      alert('harus login');
       return;
     }
     if (isCommentUpvoted) {
-      neutralvoteComment(id)
+      neutralvoteComment(id);
     } else {
       upvoteComment(id);
     }
@@ -24,11 +34,11 @@ function CommentItem({ id, content, createdAt, owner, upVotesBy = [], downVotesB
 
   const onDownvoteClick = () => {
     if (!authUser) {
-      alert("harus login");
+      alert('harus login');
       return;
     }
     if (isCommentDownvoted) {
-      neutralvoteComment(id)
+      neutralvoteComment(id);
     } else {
       downvoteComment(id);
     }
@@ -36,34 +46,54 @@ function CommentItem({ id, content, createdAt, owner, upVotesBy = [], downVotesB
 
   const newContent = content.replace(/"/g, '');
   return (
-    <div className='comment-item'>
-      <header className='comment-item__header'>
-        <div className='comment-item__user-info'>
+    <div className="comment-item">
+      <header className="comment-item__header">
+        <div className="comment-item__user-info">
           <img src={owner.avatar} alt={owner.name} />
-          <p className='commment-item__user-name'>{owner.name}</p>
+          <p className="commment-item__user-name">{owner.name}</p>
         </div>
-        <p className='comment-item__posted-at'>{postedAt(createdAt)}</p>
+        <p className="comment-item__posted-at">{postedAt(createdAt)}</p>
       </header>
       <article>
-        <p className='thread-comment__content' dangerouslySetInnerHTML={{ __html: newContent }} />
+        <p
+          className="thread-comment__content"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{ __html: newContent }}
+        />
       </article>
       <footer>
-        {
-          upVotesBy && (
-            <button type='button' className='comment-upvote__button' aria-label='vote' onClick={() => onUpvoteClick()}>
-              {isCommentUpvoted ? <FaThumbsUp style={{ color: 'red' }} /> : <FaThumbsUp />}
-              <span className='comment-upvote__label'>{upVotesBy.length}</span>
-            </button>
-          )
-        }
-        {
-          downVotesBy && (
-            <button type='button' className='comment-downvote__button' aria-label='vote' onClick={() => onDownvoteClick()}>
-              {isCommentDownvoted ? <FaThumbsDown style={{ color: 'red' }} /> : <FaThumbsDown />}
-              <span className='comment-downvote__label'>{downVotesBy.length}</span>
-            </button>
-          )
-        }
+        {upVotesBy && (
+          <button
+            type="button"
+            className="comment-upvote__button"
+            aria-label="vote"
+            onClick={() => onUpvoteClick()}
+          >
+            {isCommentUpvoted ? (
+              <FaThumbsUp style={{ color: 'red' }} />
+            ) : (
+              <FaThumbsUp />
+            )}
+            <span className="comment-upvote__label">{upVotesBy.length}</span>
+          </button>
+        )}
+        {downVotesBy && (
+          <button
+            type="button"
+            className="comment-downvote__button"
+            aria-label="vote"
+            onClick={() => onDownvoteClick()}
+          >
+            {isCommentDownvoted ? (
+              <FaThumbsDown style={{ color: 'red' }} />
+            ) : (
+              <FaThumbsDown />
+            )}
+            <span className="comment-downvote__label">
+              {downVotesBy.length}
+            </span>
+          </button>
+        )}
       </footer>
     </div>
   );
@@ -82,7 +112,7 @@ const commentShape = {
   owner: PropTypes.shape(ownerShape).isRequired,
   upVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,
   downVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,
-}
+};
 
 CommentItem.propTypes = {
   ...commentShape,

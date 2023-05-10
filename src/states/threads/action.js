@@ -60,14 +60,14 @@ function toggleNeutralvoteThreadActionCreator(userId, threadId) {
 function asyncAddThread({ title, body, category }) {
   return async (dispatch) => {
     dispatch(showLoading());
-    const threadObj = { title: title, body: body, category: category};
+    const threadObj = { title, body, category };
     try {
       await api.createThread(threadObj);
     } catch (error) {
       alert(error.message);
     }
     dispatch(hideLoading());
-  }
+  };
 }
 
 function asyncToggleUpvoteThread(threadId) {
@@ -88,7 +88,7 @@ function asyncToggleDownvoteThread(threadId) {
   return async (dispatch, getState) => {
     const { authUser } = getState();
     dispatch(toggleDownvoteThreadActionCreator(authUser.id, threadId));
-  
+
     try {
       await api.downvoteThread(threadId);
     } catch (error) {
@@ -102,7 +102,7 @@ function asyncToggleNeutralvoteThread(threadId) {
   return async (dispatch, getState) => {
     const { authUser } = getState();
     dispatch(toggleNeutralvoteThreadActionCreator(authUser.id, threadId));
-  
+
     try {
       await api.neutralvoteThread(threadId);
     } catch (error) {
@@ -119,5 +119,5 @@ export {
   asyncAddThread,
   asyncToggleUpvoteThread,
   asyncToggleDownvoteThread,
-  asyncToggleNeutralvoteThread
+  asyncToggleNeutralvoteThread,
 };

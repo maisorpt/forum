@@ -1,9 +1,10 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
 import React from 'react';
-import LoginInput from '../components/LoginInput';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { asyncSetAuthUser } from '../states/authUser/action';
 import { FaHome } from 'react-icons/fa';
+import { asyncSetAuthUser } from '../states/authUser/action';
+import LoginInput from '../components/LoginInput';
 
 function LoginPage() {
   const navigate = useNavigate();
@@ -11,22 +12,22 @@ function LoginPage() {
 
   const onLogin = ({ email, password }) => {
     dispatch(asyncSetAuthUser({ email, password }));
-    navigate(`/`);
+    navigate('/');
   };
 
   const goToHome = () => {
-    navigate('/' )
-  }
+    navigate('/');
+  };
 
   return (
-    <section className='login-page'>
-      <LoginInput login={onLogin}/>
+    <section className="login-page">
+      <LoginInput login={onLogin} />
       <p>
         Don&apos;t have an account?
         {' '}
         <Link to="/register">Register</Link>
       </p>
-      <button className='new-thread-button__home' onClick={ goToHome }><FaHome/></button>
+      <button type="button" className="new-thread-button__home" onClick={goToHome}><FaHome /></button>
     </section>
   );
 }

@@ -14,7 +14,7 @@ import LeaderboardsPage from './pages/LeaderboardsPage';
 
 function App() {
   const { authUser = null, isPreload = false } = useSelector(
-    (states) => states
+    (states) => states,
   );
 
   const dispatch = useDispatch();
@@ -30,22 +30,22 @@ function App() {
   if (isPreload) {
     return null;
   }
-  
+
   return (
     <>
-      <Loading/>
-      <div className='app-containter'>
+      <Loading />
+      <div className="app-containter">
         <header>
           <Navigation authUser={authUser} signOut={onSignOut} />
         </header>
         <main>
           <Routes>
-            <Route path='/' element={<HomePage />} />
-            <Route path='/thread/:id' element={<DetailPage />} />
-            <Route path='/create' element={<AddingPage />} />
-            <Route path='/login' element={<LoginPage />} />
-            <Route path='/register' element={<RegisterPage />} />
-            <Route path='/leaderboards' element={<LeaderboardsPage />} />
+            <Route path="/" element={<HomePage />} />
+            <Route path="/thread/:id" element={<DetailPage />} />
+            <Route path="/create" element={<AddingPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
+            <Route path="/leaderboards" element={<LeaderboardsPage />} />
           </Routes>
         </main>
       </div>

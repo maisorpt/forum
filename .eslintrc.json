@@ -6,7 +6,8 @@
     },
     "extends": [
         "eslint:recommended",
-        "plugin:react/recommended"
+        "plugin:react/recommended",
+        "airbnb"
     ],
     "overrides": [
     ],
@@ -18,10 +19,9 @@
         "react"
     ],
     "rules": {
-    },
-    "settings": {
-        "react": {
-          "version": "detect"
-        }
-      }
+        "linebreak-style": 0,
+        "no-alert": "off",
+        "react/no-array-index-key": "off",
+        "react/jsx-props-no-spreading": "off"
+    }
 }

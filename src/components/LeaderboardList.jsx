@@ -9,11 +9,9 @@ function LeaderboardList({ leaderboards }) {
         <p className="leaderboards-list__user-label">Pengguna</p>
         <p className="leaderboards-list__score-label">Skor</p>
       </header>
-      {
-          leaderboards.map((leaderboard, index) => (
-            <LeaderboardItem key={ index } { ...leaderboard}/>
-          ))
-        }
+      {leaderboards.map((leaderboard, index) => (
+        <LeaderboardItem key={index} {...leaderboard} />
+      ))}
     </div>
   );
 }
@@ -26,7 +24,7 @@ LeaderboardList.propTypes = {
         name: PropTypes.string.isRequired,
       }).isRequired,
       score: PropTypes.number.isRequired,
-    })
+    }),
   ).isRequired,
 };
 

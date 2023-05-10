@@ -27,8 +27,4 @@ function asyncLeaderboards() {
   };
 }
 
-export {
-  ActionType,
-  receiveLeaderboardsActionCreator,
-  asyncLeaderboards,
-};
+export { ActionType, receiveLeaderboardsActionCreator, asyncLeaderboards };

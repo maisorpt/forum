@@ -1,9 +1,25 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-tabindex */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import ThreadInformation from './ThreadInformation';
 
-function ThreadItem({id, title, body, category, createdAt, ownerId, upVotesBy, downVotesBy, totalComments, upvote, downvote, neutralvote }) {
+function ThreadItem({
+  id,
+  title,
+  body,
+  category,
+  createdAt,
+  ownerId,
+  upVotesBy,
+  downVotesBy,
+  totalComments,
+  upvote,
+  downvote,
+  neutralvote,
+}) {
   const navigate = useNavigate();
 
   const onThreadClick = () => {
@@ -13,17 +29,36 @@ function ThreadItem({id, title, body, category, createdAt, ownerId, upVotesBy, d
   const newBody = body.replace(/"/g, '');
 
   return (
-    <div className='thread-item'  role="button" >
-        <header tabIndex={0}>
-          <h2 className='thread-item__tittle' onClick={ onThreadClick }>{ title }</h2>
-          <h4 className='thread-item__catergory'>#{ category }</h4>
-        </header>
-        <article>
-          <p className='thread-item__body' dangerouslySetInnerHTML={{__html: newBody}} />
-        </article>
-        <ThreadInformation id={ id } createdAt={ createdAt } ownerId={ ownerId } upVotesBy={ upVotesBy } downVotesBy={ downVotesBy } totalComments={ totalComments } upvote={ upvote } downvote={ downvote } neutralvote={ neutralvote }/>
+    <div className="thread-item" role="button">
+      <header tabIndex={0}>
+        <h2 className="thread-item__tittle" onClick={onThreadClick}>
+          {title}
+        </h2>
+        <h4 className="thread-item__catergory">
+          #
+          {category}
+        </h4>
+      </header>
+      <article>
+        <p
+          className="thread-item__body"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{ __html: newBody }}
+        />
+      </article>
+      <ThreadInformation
+        id={id}
+        createdAt={createdAt}
+        ownerId={ownerId}
+        upVotesBy={upVotesBy}
+        downVotesBy={downVotesBy}
+        totalComments={totalComments}
+        upvote={upvote}
+        downvote={downvote}
+        neutralvote={neutralvote}
+      />
     </div>
-  )
+  );
 }
 
 const threadItemShape = {

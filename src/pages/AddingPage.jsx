@@ -1,9 +1,9 @@
 import React from 'react';
-import ThreadInput from '../components/ThreadInput';
 import { useDispatch, useSelector } from 'react-redux';
-import { asyncAddThread } from '../states/threads/action';
 import { useNavigate } from 'react-router-dom';
 import { FaHome } from 'react-icons/fa';
+import { asyncAddThread } from '../states/threads/action';
+import ThreadInput from '../components/ThreadInput';
 
 function AddingPage() {
   const dispatch = useDispatch();
@@ -16,22 +16,26 @@ function AddingPage() {
   };
 
   const goToHome = () => {
-    navigate('/' )
-  }
-  
-  if(!authUser) {
+    navigate('/');
+  };
+
+  if (!authUser) {
     return (
       <>
         <p>Must be logged in</p>
-        <button className='new-thread-button__home' onClick={ goToHome }><FaHome/></button>
+        <button type="button" className="new-thread-button__home" onClick={goToHome}>
+          <FaHome />
+        </button>
       </>
-    )
+    );
   }
 
   return (
-    <section className='adding-page'>
-      <ThreadInput addThread={ onAddThread }/>
-      <button className='new-thread-button__home' onClick={ goToHome }><FaHome/></button>
+    <section className="adding-page">
+      <ThreadInput addThread={onAddThread} />
+      <button type="button" className="new-thread-button__home" onClick={goToHome}>
+        <FaHome />
+      </button>
     </section>
   );
 }

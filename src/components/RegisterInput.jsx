@@ -8,17 +8,34 @@ function RegisterInput({ register }) {
   const [password, onPasswordChange] = useInput('');
 
   return (
-    <form className='register-input'>
-        <input type='text' placeholder='Nama' onChange={ onNameChange } value={ name }/>
-        <input type='text' placeholder='Email' onChange={ onEmailChange} value={ email }/>
-        <input type='password' placeholder='Password' onChange={ onPasswordChange } value={ password } />
-        <button onClick={() => register({ name, email, password })}>Register</button>
+    <form className="register-input">
+      <input
+        type="text"
+        placeholder="Nama"
+        onChange={onNameChange}
+        value={name}
+      />
+      <input
+        type="text"
+        placeholder="Email"
+        onChange={onEmailChange}
+        value={email}
+      />
+      <input
+        type="password"
+        placeholder="Password"
+        onChange={onPasswordChange}
+        value={password}
+      />
+      <button type="button" onClick={() => register({ name, email, password })}>
+        Register
+      </button>
     </form>
   );
 }
 
 RegisterInput.propTypes = {
-    register: PropTypes.func.isRequired,
+  register: PropTypes.func.isRequired,
 };
 
 export default RegisterInput;

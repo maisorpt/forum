@@ -1,11 +1,13 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { postedAt } from "../utlis";
-import ThreadInformation from "./ThreadInformation";
-import ThreadComment from "./ThreadComment";
+/* eslint-disable react/no-danger */
+/* eslint-disable react/require-default-props */
+import React from 'react';
+import PropTypes from 'prop-types';
+import { postedAt } from '../utlis';
+import ThreadInformation from './ThreadInformation';
+import ThreadComment from './ThreadComment';
 
 function ThreadDetail({
-  id ='',
+  id = '',
   title = '',
   body = '',
   category,
@@ -24,7 +26,7 @@ function ThreadDetail({
 }) {
   const totalComments = comments.length;
 
-  const newBody = body.replace(/"/g, "");
+  const newBody = body.replace(/"/g, '');
 
   return (
     <>
@@ -32,13 +34,20 @@ function ThreadDetail({
         <header className="thread-header">
           <div className="thread-header__info">
             <h2 className="thread-header__title">{title}</h2>
-            <p className="thread-header__category">#{category}</p>
+            <p className="thread-header__category">
+              #
+              {category}
+            </p>
             <div className="thread-header__profile">
               <img src={owner.avatar} alt="" />
               <div className="thread-header__detail">
                 <p className="thread-header__user-name">
-                  {owner.name}{" "}
-                  <span className="thread-header__user-id">@{owner.name}</span>
+                  {owner.name}
+                  {' '}
+                  <span className="thread-header__user-id">
+                    @
+                    {owner.name}
+                  </span>
                 </p>
                 <p className="thread-header__post-created">
                   {postedAt(createdAt)}
@@ -66,7 +75,13 @@ function ThreadDetail({
           />
         </footer>
       </div>
-      <ThreadComment comments={comments} upvoteComment={upvoteComment} downvoteComment={downvoteComment} neutralvoteComment={neutralvoteComment} addComment={addComment} />
+      <ThreadComment
+        comments={comments}
+        upvoteComment={upvoteComment}
+        downvoteComment={downvoteComment}
+        neutralvoteComment={neutralvoteComment}
+        addComment={addComment}
+      />
     </>
   );
 }

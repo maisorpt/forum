@@ -1,9 +1,11 @@
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable no-use-before-define */
 const api = (() => {
   const BASE_URL = 'https://forum-api.dicoding.dev/v1';
 
   async function _fetchWithAuth(url, option = {}) {
     return fetch(url, {
-      ...option, 
+      ...option,
       headers: {
         ...option.headers,
         Authorization: `Bearer ${getAccessToken()}`,
@@ -23,24 +25,24 @@ const api = (() => {
     const response = await fetch(`${BASE_URL}/register`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(newUser),
     });
-  
+
     const responseJson = await response.json();
     const { status, message } = responseJson;
-  
+
     if (status !== 'success') {
       throw new Error(message);
     }
-  
+
     const { data: { user } } = responseJson;
-  
+
     return user;
   }
 
-  async function login({ email, password}) {
+  async function login({ email, password }) {
     const response = await fetch(`${BASE_URL}/login`, {
       method: 'POST',
       headers: {
@@ -60,7 +62,7 @@ const api = (() => {
       throw new Error(message);
     }
 
-    const  {data: { token } } = responseJson;
+    const { data: { token } } = responseJson;
 
     return token;
   }
@@ -69,14 +71,14 @@ const api = (() => {
     const response = await _fetchWithAuth(`${BASE_URL}/users/me`);
 
     const responseJson = await response.json();
-    
+
     const { status, message } = responseJson;
 
     if (status !== 'success') {
       throw new Error(message);
     }
 
-    const {data: { user } } = responseJson;
+    const { data: { user } } = responseJson;
 
     return user;
   }
@@ -91,7 +93,7 @@ const api = (() => {
       throw new Error(message);
     }
 
-    const {data: { users } } = responseJson;
+    const { data: { users } } = responseJson;
 
     return users;
   }
@@ -107,7 +109,7 @@ const api = (() => {
       throw new Error(message);
     }
 
-    const {data:  {threads } } = responseJson;
+    const { data: { threads } } = responseJson;
 
     return threads;
   }
@@ -122,22 +124,22 @@ const api = (() => {
       throw new Error(message);
     }
 
-    const {data: { detailThread } } = responseJson;
+    const { data: { detailThread } } = responseJson;
 
     return detailThread;
   }
 
-  async function createThread({ title, body, category}) {
+  async function createThread({ title, body, category }) {
     const response = await _fetchWithAuth(`${BASE_URL}/threads`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ title, body, category}),
+      body: JSON.stringify({ title, body, category }),
     });
     const responseJson = await response.json();
-    const { status, message} = responseJson;
-    
+    const { status, message } = responseJson;
+
     if (status !== 'success') {
       throw new Error(message);
     }
@@ -147,7 +149,7 @@ const api = (() => {
     return thread;
   }
 
-async function createComment({ content }, threadId) {
+  async function createComment({ content }, threadId) {
     const response = await _fetchWithAuth(`${BASE_URL}/threads/${threadId}/comments`, {
       method: 'POST',
       headers: {
@@ -161,11 +163,11 @@ async function createComment({ content }, threadId) {
     if (status !== 'success') {
       throw new Error(message);
     }
-    
+
     const { data: { comment } } = responseJson;
 
     return comment;
-}
+  }
 
   async function upvoteThread(id) {
     const response = await _fetchWithAuth(`${BASE_URL}/threads/${id}/up-vote`, {
@@ -176,10 +178,10 @@ async function createComment({ content }, threadId) {
     const { status, message } = responseJson;
 
     if (status !== 'success') {
-        throw new Error(message);
-      }
+      throw new Error(message);
+    }
 
-    const {data: { vote } } = responseJson;
+    const { data: { vote } } = responseJson;
 
     return vote;
   }
@@ -193,10 +195,10 @@ async function createComment({ content }, threadId) {
     const { status, message } = responseJson;
 
     if (status !== 'success') {
-        throw new Error(message);
-      }
+      throw new Error(message);
+    }
 
-    const {data: { vote } } = responseJson;
+    const { data: { vote } } = responseJson;
 
     return vote;
   }
@@ -210,10 +212,10 @@ async function createComment({ content }, threadId) {
     const { status, message } = responseJson;
 
     if (status !== 'success') {
-        throw new Error(message);
-      }
+      throw new Error(message);
+    }
 
-    const {data: { vote } } = responseJson;
+    const { data: { vote } } = responseJson;
 
     return vote;
   }
@@ -227,10 +229,10 @@ async function createComment({ content }, threadId) {
     const { status, message } = responseJson;
 
     if (status !== 'success') {
-        throw new Error(message);
-      }
+      throw new Error(message);
+    }
 
-    const {data: { vote } } = responseJson;
+    const { data: { vote } } = responseJson;
 
     return vote;
   }
@@ -244,10 +246,10 @@ async function createComment({ content }, threadId) {
     const { status, message } = responseJson;
 
     if (status !== 'success') {
-        throw new Error(message);
-      }
+      throw new Error(message);
+    }
 
-    const {data: { vote } } = responseJson;
+    const { data: { vote } } = responseJson;
 
     return vote;
   }
@@ -261,10 +263,10 @@ async function createComment({ content }, threadId) {
     const { status, message } = responseJson;
 
     if (status !== 'success') {
-        throw new Error(message);
-      }
+      throw new Error(message);
+    }
 
-    const {data: { vote } } = responseJson;
+    const { data: { vote } } = responseJson;
 
     return vote;
   }
@@ -279,7 +281,7 @@ async function createComment({ content }, threadId) {
       throw new Error(message);
     }
 
-    const {data: { leaderboards } } = responseJson;
+    const { data: { leaderboards } } = responseJson;
 
     return leaderboards;
   }
@@ -301,9 +303,8 @@ async function createComment({ content }, threadId) {
     upvoteComment,
     downvoteComment,
     neutralvoteComment,
-    getLeaderboards
-  }
-
+    getLeaderboards,
+  };
 })();
 
 export default api;

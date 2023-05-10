@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 import { showLoading, hideLoading } from 'react-redux-loading-bar';
 import api from '../../utlis/api';
 import { receiveThreadsActionCreator } from '../threads/action';
